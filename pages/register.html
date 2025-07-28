@@ -1,1 +1,59 @@
-// Registration Page
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Murder Mystery - Register</title>
+</head>
+<body>
+    <h1>Murder Mystery Game - Register</h1>
+    
+    <form id="registerForm">
+        <div>
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="firstname" required>
+        </div>
+        
+        <div>
+            <label for="surnames">Surname:</label>
+            <input type="text" id="surnames" name="surnames" required>
+        </div>
+        
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        
+        <div>
+            <label for="account_type">Account Type:</label>
+            <select id="account_type" name="account_type" required>
+                <option value="1">Student</option>
+                <option value="2">Teacher</option>
+            </select>
+        </div>
+        
+        <div>
+            <button type="submit">Register</button>
+        </div>
+    </form>
+    
+    <div id="message"></div>
+    
+    <div>
+        <p>Already have an account? <a href="/login">Login here</a></p>
+        <p><a href="/">Back to Home</a></p>
+    </div>
+    
+    <script src="/static/js/register.js"></script>
+</body>
+</html>
