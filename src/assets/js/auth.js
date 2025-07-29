@@ -12,6 +12,7 @@ const checkAuth = async (requiredAccountType = null) => {
 
   try {
     const user = JSON.parse(userData);
+    window.user = user;
     console.log('User data:', user);
     console.log('Required account type:', requiredAccountType, 'User account type:', user.account_type);
 

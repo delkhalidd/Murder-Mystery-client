@@ -20,13 +20,25 @@ const displayCaseDetails = async (caseDetails) => {
   try {
     const questionsStatus = await getQuestionsStatus(caseDetails.id);
 
-    document.getElementById('case-info').innerHTML = `
-      <h4>${caseDetails.title}</h4>
-      <p><strong>Description:</strong> ${caseDetails.description || 'None'}</p>
-      <p><strong>Created:</strong> ${new Date(caseDetails.created_at).toLocaleDateString()}</p>
-      <p><strong>Case ID:</strong> ${caseDetails.id}</p>
-      <p><strong>Invite Token:</strong> <code>${caseDetails.invite_token}</code></p>
-    `;
+    const overview = document.createElement("div");
+    const h = document.createElement("h2");
+    h.innerText = caseDetails.title;
+    overview.appendChild(h);
+    for(const [name, detail] of [
+      ["Description", caseDetails.description || "None"],
+      ["Created", new Date(caseDetails.created_at).toLocaleDateString()],
+      ["Case ID", caseDetails.id],
+      ["Invite Token", caseDetails.invite_token]
+    ]){
+      const p = document.createElement("p");
+      const strong = document.createElement("strong");
+      const span = document.createElement("span");
+      span.innerText = detail;
+      strong.innerText = `${name}:`
+      p.append(strong, span);
+      overview.appendChild(p);
+    }
+    document.getElementById('case-info').innerHTML = overview.innerHTML;
 
     const statusContainer = document.getElementById('questions-status');
     let statusHtml = `<h4>Content Status: ${questionsStatus.status}</h4>`;
@@ -140,7 +152,7 @@ const showMessage = (message, type = 'info') => {
 
       idHeader.innerText = `Case ${i}`;
       nameHeader.innerText = c.title;
-      playerCountHeader.innerText = "TODO"
+      playerCountHeader.innerText = c.questions.length;
       analyticButton.innerText = "View Analytics"
 
       child.append(idHeader, nameHeader, playerCountHeader, analyticButton);
@@ -164,6 +176,8 @@ const showMessage = (message, type = 'info') => {
     });
   }
 })();
+
+document.getElementById("user_fname").innerText = JSON.parse(localStorage.getItem('userData')).firstname
 
 window.viewCaseDetails = viewCaseDetails;
 window.copyInviteToken = copyInviteToken;
