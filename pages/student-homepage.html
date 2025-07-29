@@ -18,29 +18,41 @@
     <main>
         <div class="homepage-container">
             <h2>Welcome, Student!</h2>
-            <p>You have successfully accessed the student homepage.</p>
+            <p>Ready to solve some mysteries? Join a case or continue your investigation.</p>
             
             <div class="game-actions">
                 <div class="action-card">
-                    <h3>Available Cases</h3>
-                    <p>Browse murder mystery cases assigned by your teacher.</p>
-                    <button class="btn btn-primary">View Cases</button>
+                    <h3>Join New Case</h3>
+                    <p>Enter an invite token from your teacher to join a new case.</p>
+                    <form id="joinCaseForm" class="inline-form">
+                        <input type="text" id="inviteToken" placeholder="Enter invite token" required>
+                        <button type="submit" class="btn btn-primary">Join Case</button>
+                    </form>
                 </div>
                 
                 <div class="action-card">
-                    <h3>Continue Playing</h3>
-                    <p>Resume a case you were working on.</p>
-                    <a href="/game-playing" class="btn btn-secondary">Continue Game</a>
+                    <h3>My Active Cases</h3>
+                    <button id="loadCasesBtn" class="btn btn-secondary">View My Cases</button>
+                    <div id="activeCases" class="cases-list"></div>
+                </div>
+                
+                <div class="action-card">
+                    <h3>My Progress</h3>
+                    <p>Check your answers and performance on completed cases.</p>
+                    <button id="viewProgressBtn" class="btn btn-secondary">View Progress</button>
                 </div>
             </div>
+            
+            <div id="message" class="message-container"></div>
         </div>
     </main>
     
     <script src="/static/js/auth.js"></script>
+    <script src="/static/js/student-dashboard.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
           console.log('Student homepage loading...');
-          await checkAuth(1);
+          await checkAuth(1); 
         });
     </script>
 </body>

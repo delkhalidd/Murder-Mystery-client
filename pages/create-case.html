@@ -1,1 +1,94 @@
-// Create Case Page
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Case - Murder Mystery</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Create New Case</h1>
+        <nav>
+            <a href="/teacher-dashboard" class="nav-link">Back to Dashboard</a>
+            <a href="/" class="nav-link">Home</a>
+            <a href="#" onclick="logout()" class="nav-link">Logout</a>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="dashboard-container">
+            <h2>Create Murder Mystery Case</h2>
+            <p>Create a new case for your students to investigate.</p>
+            
+            <form id="createCaseForm" class="case-form">
+                <div class="form-section">
+                    <h3>Case Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="title">Case Title:</label>
+                        <input type="text" id="title" name="title" required maxlength="50"
+                               placeholder="e.g., The Mystery of the Missing Diamond">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Case Description:</label>
+                        <textarea id="description" name="description" rows="4"
+                                  placeholder="Brief overview of the case scenario..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3>Case Brief</h3>
+                    <p>Write the main scenario/story that students will read when they start the case.</p>
+                    
+                    <div class="form-group">
+                        <label for="brief">Case Brief:</label>
+                        <textarea id="brief" name="brief" required rows="8"
+                                  placeholder="Write the full case brief here. This is what students will read first to understand the scenario..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3>Investigation Elements</h3>
+                    <p>Add scenarios and questions for students to investigate.</p>
+                    
+                    <div id="inputs-container">
+                        <div class="input-entry">
+                            <h4>Investigation Element 1</h4>
+                            <div class="form-group">
+                                <label>Scenario/Situation:</label>
+                                <textarea name="input_body_0" rows="3" required 
+                                          placeholder="Describe what the student encounters (e.g., 'You examine the victim's office and notice...')"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Correct Conclusion/Answer:</label>
+                                <textarea name="input_answer_0" rows="2" required 
+                                          placeholder="What should the student conclude from this scenario?"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="add-input" class="btn btn-secondary">Add Another Element</button>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Create Case</button>
+                    <button type="button" onclick="window.location.href='/teacher-dashboard'" 
+                            class="btn btn-secondary">Cancel</button>
+                </div>
+            </form>
+            
+            <div id="message"></div>
+        </div>
+    </main>
+    
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/create-case.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+          await checkAuth(0);
+        });
+    </script>
+</body>
+</html>
