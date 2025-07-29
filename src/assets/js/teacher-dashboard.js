@@ -143,9 +143,16 @@ const showMessage = (message, type = 'info') => {
       const idHeader = document.createElement("h2");
       const nameHeader = document.createElement("h2");
       const playerCountHeader = document.createElement("h2");
-      const analyticButton = document.createElement("a");
-      analyticButton.href = `/case-analytics?id=${c.id}`;
-      analyticButton.addEventListener("click", (e) => {
+      const buttonCont = document.createElement("div");
+      buttonCont.classList.add("buttons");
+
+      const detailsButton = document.createElement("a");
+      const detailsSpan = document.createElement("span");
+      const analyticsButton = document.createElement("a");
+      const analyticsSpan = document.createElement("span");
+      analyticsButton.href = `/case-analytics?id=${c.id}`;
+
+      detailsButton.addEventListener("click", (e) => {
         e.preventDefault();
         displayCaseDetails(c);
       });
@@ -153,9 +160,13 @@ const showMessage = (message, type = 'info') => {
       idHeader.innerText = `Case ${i}`;
       nameHeader.innerText = c.title;
       playerCountHeader.innerText = c.questions.length;
-      analyticButton.innerText = "View Analytics"
+      detailsSpan.innerText = "View Details";
+      analyticsSpan.innerText = "View Analytics";
 
-      child.append(idHeader, nameHeader, playerCountHeader, analyticButton);
+      detailsButton.append(detailsSpan);
+      analyticsButton.append(analyticsSpan);
+      buttonCont.append(detailsButton, analyticsButton);
+      child.append(idHeader, nameHeader, playerCountHeader, buttonCont);
 
       casesContainer.appendChild(child);
       i--;
