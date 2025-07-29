@@ -18,7 +18,7 @@
     <main>
         <div class="dashboard-container">
             <h2>Welcome, Teacher!</h2>
-            <p>You have successfully accessed the teacher dashboard.</p>
+            <p>Manage your murder mystery cases and track student progress.</p>
             
             <div class="dashboard-actions">
                 <div class="action-card">
@@ -28,19 +28,34 @@
                 </div>
                 
                 <div class="action-card">
-                    <h3>Student Progress</h3>
-                    <p>Monitor how your students are progressing through cases.</p>
-                    <button class="btn btn-secondary">View Progress</button>
+                    <h3>My Cases</h3>
+                    <p>View and manage cases you've created.</p>
+                    <button id="loadCasesBtn" class="btn btn-secondary">View My Cases</button>
                 </div>
             </div>
+            
+            <div id="cases-section" class="cases-section" style="display: none;">
+                <h3>Your Cases</h3>
+                <div id="cases-list">Loading cases...</div>
+            </div>
+            
+            <div id="case-details" class="case-details" style="display: none;">
+                <h3>Case Details</h3>
+                <div id="case-info"></div>
+                <div id="questions-status"></div>
+                <div id="questions-list"></div>
+                <button id="back-to-cases" class="btn btn-secondary">Back to Cases</button>
+            </div>
+            
+            <div id="message" class="message-container"></div>
         </div>
     </main>
     
     <script src="/static/js/auth.js"></script>
+    <script src="/static/js/teacher-dashboard.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-          console.log('Teacher dashboard loading...');
-          await checkAuth(0);
+          await checkAuth(0); 
         });
     </script>
 </body>
