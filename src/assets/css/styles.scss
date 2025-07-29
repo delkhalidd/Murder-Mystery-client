@@ -1,0 +1,78 @@
+@import 'node_modules/modern-normalize/modern-normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
+
+@import "base.scss";
+
+.teacher-cont{
+  gap: 1rem;
+  flex-grow: 1;
+  @include shadow;
+}
+
+.teacher-cont header{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.teacher-cont header>div{
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.teacher-cont header>nav{
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  font-size: 2rem;
+  gap: 1rem;
+}
+
+.teacher-cont header>nav a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:first-child{
+    @include box(true);
+  }
+  &:last-child{
+    @include box(false);
+  }
+}
+
+.teacher-cont main{
+  flex-grow: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.teacher-cont main .cases, .teacher-cont main .case-details{
+  flex-grow: 1;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  > :not(:last-child) {
+    border: 0 solid var(--brand);
+    border-bottom-width: 1px;
+  }
+}
+
+.teacher-cont main .case{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.2rem 1rem;
+}
+
+.teacher-cont main .case a{
+  @include box(true);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

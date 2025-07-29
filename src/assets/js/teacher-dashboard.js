@@ -1,110 +1,5 @@
-
-const getAllCases = async () => {
-  const cases = [];
-  const userData = JSON.parse(localStorage.getItem('userData'));
-  
-  console.log('Getting all cases for user:', userData);
-  
-  
-  for (let id = 1; id <= 20; id++) {
-    try {
-      const response = await makeAuthenticatedRequest(`${API_URL}/case/${id}`, {
-        method: 'GET'
-      });
-      
-      if (response.ok) {
-        const caseData = await response.json();
-        console.log(`Case ${id}:`, caseData);
-        if (caseData.created_by === userData.id) {
-          cases.push(caseData);
-        }
-      } else if (response.status === 404) {
-        console.log(`Case ${id} not found (404)`);
-      } else if (response.status === 403) {
-        console.log(`Case ${id} access forbidden (403)`);
-        
-      }
-    } catch (error) {
-      console.log(`Case ${id} error:`, error.message);
-     
-      if (error.message === 'Authentication failed') {
-        console.log('Authentication failed globally, stopping...');
-        throw error; 
-      } else if (error.message === 'Access forbidden') {
-        console.log(`Case ${id} access forbidden, continuing...`);
-       
-      } else {
-        console.log(`Case ${id} other error, continuing...`);
-        
-      }
-    }
-  }
-  
-  console.log('Found cases:', cases);
-  return cases;
-};
-
-
-const getCaseDetails = async (caseId) => {
-  try {
-    const response = await makeAuthenticatedRequest(`${API_URL}/case/${caseId}`, {
-      method: 'GET'
-    });
-
-    if (response.ok) {
-      return await response.json();
-    } else {
-      throw new Error('Failed to load case details');
-    }
-  } catch (error) {
-    console.error('Load case details failed:', error);
-    throw error;
-  }
-};
-
-const getQuestionsStatus = async (caseId) => {
-  try {
-    const response = await makeAuthenticatedRequest(`${API_URL}/case/${caseId}/questions/status`, {
-      method: 'GET'
-    });
-
-    if (response.ok) {
-      return await response.json();
-    } else {
-      throw new Error('Failed to load questions status');
-    }
-  } catch (error) {
-    console.error('Load questions status failed:', error);
-    throw error;
-  }
-};
-
-const displayCases = (cases) => {
-  const container = document.getElementById('cases-list');
-  
-  if (cases.length === 0) {
-    container.innerHTML = '<p>No cases found. <a href="/create-case">Create your first case!</a></p>';
-    return;
-  }
-  
-  container.innerHTML = cases.map(caseItem => `
-    <div class="case-item">
-      <h4>${caseItem.title}</h4>
-      <p><strong>Description:</strong> ${caseItem.description || 'No description'}</p>
-      <p><strong>Created:</strong> ${new Date(caseItem.created_at).toLocaleDateString()}</p>
-      <p><strong>Case ID:</strong> ${caseItem.id}</p>
-      <p><strong>Invite Token:</strong> <code class="invite-token">${caseItem.invite_token}</code></p>
-      <p><strong>Questions:</strong> ${caseItem.questions ? caseItem.questions.length : 0}</p>
-      <p><strong>Briefs:</strong> ${caseItem.briefs ? caseItem.briefs.length : 0}</p>
-      <button onclick="copyInviteToken('${caseItem.invite_token}')" class="btn btn-secondary btn-small">
-        Copy Token
-      </button>
-      <button onclick="viewCaseDetails(${caseItem.id})" class="btn btn-primary btn-small">
-        View Details
-      </button>
-    </div>
-  `).join('');
-};
+import {API_URL} from "./const";
+import {getCaseDetails, getMyCases, getQuestionsStatus} from "./api";
 
 const copyInviteToken = async (token) => {
   try {
@@ -121,11 +16,10 @@ const copyInviteToken = async (token) => {
   }
 };
 
-const displayCaseDetails = async (caseId) => {
+const displayCaseDetails = async (caseDetails) => {
   try {
-    const caseDetails = await getCaseDetails(caseId);
-    const questionsStatus = await getQuestionsStatus(caseId);
-    
+    const questionsStatus = await getQuestionsStatus(caseDetails.id);
+
     document.getElementById('case-info').innerHTML = `
       <h4>${caseDetails.title}</h4>
       <p><strong>Description:</strong> ${caseDetails.description || 'None'}</p>
@@ -133,10 +27,10 @@ const displayCaseDetails = async (caseId) => {
       <p><strong>Case ID:</strong> ${caseDetails.id}</p>
       <p><strong>Invite Token:</strong> <code>${caseDetails.invite_token}</code></p>
     `;
-    
+
     const statusContainer = document.getElementById('questions-status');
     let statusHtml = `<h4>Content Status: ${questionsStatus.status}</h4>`;
-    
+
     if (questionsStatus.status === 'PENDING') {
       statusHtml += '<p style="color: orange;">No questions created yet. Questions are generated when you add investigation elements.</p>';
     } else if (questionsStatus.status === 'PROCESSING') {
@@ -146,18 +40,18 @@ const displayCaseDetails = async (caseId) => {
     } else if (questionsStatus.status === 'COMPLETED') {
       statusHtml += '<p style="color: green;">Questions and briefs are ready for students!</p>';
     }
-    
+
     statusContainer.innerHTML = statusHtml;
-    
+
     if (questionsStatus.status === 'COMPLETED' || (caseDetails.questions && caseDetails.questions.length > 0)) {
       displayQuestionsAndBriefs(caseDetails);
     } else {
       document.getElementById('questions-list').innerHTML = '';
     }
-    
+
     document.getElementById('cases-section').style.display = 'none';
     document.getElementById('case-details').style.display = 'block';
-    
+
   } catch (error) {
     showMessage(`Error loading case details: ${error.message}`, 'error');
   }
@@ -166,7 +60,7 @@ const displayCaseDetails = async (caseId) => {
 const displayQuestionsAndBriefs = (caseData) => {
   const container = document.getElementById('questions-list');
   let html = '';
-  
+
   if (caseData.briefs && caseData.briefs.length > 0) {
     html += `
       <h4>Case Briefs (${caseData.briefs.length})</h4>
@@ -178,7 +72,7 @@ const displayQuestionsAndBriefs = (caseData) => {
       `).join('')}
     `;
   }
-  
+
   if (caseData.questions && caseData.questions.length > 0) {
     html += `
       <h4>Generated Questions (${caseData.questions.length})</h4>
@@ -192,11 +86,11 @@ const displayQuestionsAndBriefs = (caseData) => {
       `).join('')}
     `;
   }
-  
+
   if (!html) {
     html = '<p>No questions or briefs found.</p>';
   }
-  
+
   container.innerHTML = html;
 };
 
@@ -207,50 +101,61 @@ const viewCaseDetails = (caseId) => {
 const showMessage = (message, type = 'info') => {
   const messageDiv = document.getElementById('message');
   messageDiv.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
-  
+
   setTimeout(() => {
     messageDiv.innerHTML = '';
   }, 5000);
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+(async()=>{
   console.log('Teacher dashboard script loaded');
   console.log('API_URL available:', typeof API_URL !== 'undefined' ? API_URL : 'NOT FOUND');
-  
+
   const loadCasesBtn = document.getElementById('loadCasesBtn');
   const backToCasesBtn = document.getElementById('back-to-cases');
-  
+
   console.log('Buttons found:', {
     loadCasesBtn: !!loadCasesBtn,
     backToCasesBtn: !!backToCasesBtn
   });
-  
-  if (loadCasesBtn) {
-    loadCasesBtn.addEventListener('click', async (e) => {
-      e.preventDefault();
-      console.log('Load cases button clicked!');
-      
-      try {
-        showMessage('Loading your cases...', 'info');
-        
-        const cases = await getAllCases();
-        console.log('Cases retrieved:', cases);
-        displayCases(cases);
-        
-        document.getElementById('cases-section').style.display = 'block';
-        document.getElementById('case-details').style.display = 'none';
-        
-        showMessage('', '');
-        
-      } catch (error) {
-        console.error('Error in load cases:', error);
-        showMessage(`Error loading cases: ${error.message}`, 'error');
-      }
-    });
-  } else {
-    console.error('loadCasesBtn not found!');
+
+  try {
+    const cases = await getMyCases();
+    console.log('Cases retrieved:', cases);
+
+    const casesContainer = document.querySelector(".cases");
+    let i = cases.length;
+    for(const c of cases){
+      const child = document.createElement("div");
+      child.classList.add("case");
+      const idHeader = document.createElement("h2");
+      const nameHeader = document.createElement("h2");
+      const playerCountHeader = document.createElement("h2");
+      const analyticButton = document.createElement("a");
+      analyticButton.href = `/case-analytics?id=${c.id}`;
+      analyticButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        displayCaseDetails(c);
+      });
+
+      idHeader.innerText = `Case ${i}`;
+      nameHeader.innerText = c.title;
+      playerCountHeader.innerText = "TODO"
+      analyticButton.innerText = "View Analytics"
+
+      child.append(idHeader, nameHeader, playerCountHeader, analyticButton);
+
+      casesContainer.appendChild(child);
+      i--;
+    }
+
+    showMessage('', '');
+
+  } catch (error) {
+    console.error('Error in load cases:', error);
+    showMessage(`Error loading cases: ${error.message}`, 'error');
   }
-  
+
   if (backToCasesBtn) {
     backToCasesBtn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -258,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('case-details').style.display = 'none';
     });
   }
-});
+})();
 
 window.viewCaseDetails = viewCaseDetails;
 window.copyInviteToken = copyInviteToken;

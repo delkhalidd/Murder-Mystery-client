@@ -1,62 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Dashboard - Murder Mystery</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <script defer type="module" src="assets/js/auth.js"></script>
-    <script defer type="module" src="assets/js/teacher-dashboard.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Dashboard - Murder Mystery</title>
+  <link rel="stylesheet" href="assets/css/styles.scss">
+  <script defer type="module" src="assets/js/auth.js"></script>
+  <script defer type="module" src="assets/js/teacher-dashboard.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Teacher Dashboard</h1>
-        <nav>
-            <a href="/static" class="nav-link">Home</a>
-            <a href="#" onclick="logout()" class="nav-link">Logout</a>
-        </nav>
-    </header>
+<div class="background"></div>
+<div class="teacher-cont base-cont">
+  <header>
+    <div class="box">
+      <img src="./assets/img/logo.png" alt="" class="logo shadow">
+      <h1 class="shadow underline">Welcome {{U_FNAME}}</h1>
+    </div>
+    <nav>
+      <a href="#" onclick="logout()" class="nav-link">
+        <span class="shadow">Logout</span>
+      </a>
+      <a href="/create-case" class="nav-link">
+        <span class="shadow">Create Case</span>
+      </a>
+    </nav>
+  </header>
 
-    <main>
-        <div class="dashboard-container">
-            <h2>Welcome, Teacher!</h2>
-            <p>Manage your murder mystery cases and track student progress.</p>
+  <main class="box">
+    <h1 class="shadow underline">Closed Cases</h1>
+    <div class="cases" id="cases-section">
 
-            <div class="dashboard-actions">
-                <div class="action-card">
-                    <h3>Case Management</h3>
-                    <p>Create and manage mystery cases for your students.</p>
-                    <a href="/create-case" class="btn btn-primary">Create New Case</a>
-                </div>
+    </div>
+    <div id="case-details" class="case-details" style="display: none;">
+      <h3>Case Details</h3>
+      <div id="case-info"></div>
+      <div id="questions-status"></div>
+      <div id="questions-list"></div>
+      <button id="back-to-cases" class="btn btn-secondary">Back to Cases</button>
+    </div>
+  </main>
 
-                <div class="action-card">
-                    <h3>My Cases</h3>
-                    <p>View and manage cases you've created.</p>
-                    <button id="loadCasesBtn" class="btn btn-secondary">View My Cases</button>
-                </div>
-            </div>
-
-            <div id="cases-section" class="cases-section" style="display: none;">
-                <h3>Your Cases</h3>
-                <div id="cases-list">Loading cases...</div>
-            </div>
-
-            <div id="case-details" class="case-details" style="display: none;">
-                <h3>Case Details</h3>
-                <div id="case-info"></div>
-                <div id="questions-status"></div>
-                <div id="questions-list"></div>
-                <button id="back-to-cases" class="btn btn-secondary">Back to Cases</button>
-            </div>
-
-            <div id="message" class="message-container"></div>
-        </div>
-    </main>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-          await checkAuth(0);
-        });
-    </script>
+  <div id="message" class="message-container"></div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    await checkAuth(0);
+  });
+</script>
 </body>
 </html>

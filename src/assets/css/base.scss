@@ -1,0 +1,99 @@
+:root{
+  --neutral: #fffefe;
+  --brand: #febc5a;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+body{
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: "Inknut Antiqua", serif;
+}
+
+.base-cont{
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+}
+
+.background{
+  position: relative;
+}
+
+.background:before{
+  position: fixed;
+  background-size: cover;
+  background: url("../img/bg.jpg") center;
+  width: 102vw;
+  height: 102vh;
+  top: -1vh;
+  left: -1vw;
+  filter: blur(8px);
+  content: "";
+  z-index: -1;
+  overflow: hidden;
+}
+
+@mixin box($alt: false) {
+  @if $alt {
+    --bg: var(--brand);
+    --color: var(--neutral);
+  } @else {
+    --bg: var(--neutral);
+    --color: var(--brand);
+  }
+
+  background: var(--bg);
+  color: var(--color);
+  border-radius: 16px;
+  padding: 8px;
+}
+
+@mixin shadow{
+  filter: drop-shadow(0 3px 3px rgb(0 0 0 / 0.12));
+}
+
+.shadow{
+  @include shadow;
+}
+
+.box{
+  @include box(false);
+}
+
+.box--alt{
+  @include box(true);
+}
+
+.text-neutral{
+  color: var(--neutral);
+}
+
+.text-brand{
+  color: var(--brand);
+}
+
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+.logo{
+  height: 8rem;
+  padding: 1rem;
+}
+
+h1{
+  font-weight: 500;
+  font-size: 3rem;
+}
+
+.underline{
+  text-decoration: underline;
+}
