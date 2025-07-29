@@ -1,1 +1,47 @@
-// Teacher Dashboard Page
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - Murder Mystery</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Teacher Dashboard</h1>
+        <nav>
+            <a href="/" class="nav-link">Home</a>
+            <a href="#" onclick="logout()" class="nav-link">Logout</a>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="dashboard-container">
+            <h2>Welcome, Teacher!</h2>
+            <p>You have successfully accessed the teacher dashboard.</p>
+            
+            <div class="dashboard-actions">
+                <div class="action-card">
+                    <h3>Case Management</h3>
+                    <p>Create and manage murder mystery cases for your students.</p>
+                    <a href="/create-case" class="btn btn-primary">Create New Case</a>
+                </div>
+                
+                <div class="action-card">
+                    <h3>Student Progress</h3>
+                    <p>Monitor how your students are progressing through cases.</p>
+                    <button class="btn btn-secondary">View Progress</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script src="/static/js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+          console.log('Teacher dashboard loading...');
+          await checkAuth(0);
+        });
+    </script>
+</body>
+</html>

@@ -24,6 +24,13 @@ const login = async (username, password) => {
   }
 };
 
+
+function setCookie(name, value, days) {
+  const expires = new Date();
+  expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+  document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('loginForm');
   
@@ -36,45 +43,31 @@ document.addEventListener('DOMContentLoaded', () => {
       
       try {
         const result = await login(username, password);
-        console.log('Full login response:', JSON.stringify(result, null, 2)); 
+        console.log('Login response:', result);
         
         if (result.token) {
           localStorage.setItem('authToken', result.token);
+          setCookie('authToken', result.token, 1); 
         }
+        
         if (result.user) {
           localStorage.setItem('userData', JSON.stringify(result.user));
-          console.log('User object:', JSON.stringify(result.user, null, 2)); 
-        }
-        
-        
-        let accountType = null;
-        
-        if (result.user && result.user.account_type !== undefined) {
-          accountType = result.user.account_type;
-        } else if (result.account_type !== undefined) {
-          accountType = result.account_type;
-        } else if (result.user && result.user.accountType !== undefined) {
-          accountType = result.user.accountType;
-        } else if (result.user && result.user.role !== undefined) {
-          accountType = result.user.role;
-        }
-        
-        console.log('Found account type:', accountType, 'Type:', typeof accountType);
-        
-        if (accountType !== null && accountType !== undefined) {
-          if (accountType === 0 || accountType === '0' || accountType === 'teacher') {
+          
+          const accountType = result.user.account_type;
+          console.log('Account type:', accountType);
+          
+          if (accountType === 0 || accountType === '0') {
             alert('Welcome, Teacher!');
             window.location.href = '/teacher-dashboard';
-          } else if (accountType === 1 || accountType === '1' || accountType === 'student') {
+          } else if (accountType === 1 || accountType === '1') {
             alert('Welcome, Student!');
             window.location.href = '/student-homepage';
           } else {
-            alert(`Login successful! Unknown account type: ${accountType}`);
+            alert('Login successful!');
             window.location.href = '/';
           }
         } else {
-          console.log('No account_type found in result:', result);
-          alert('Login successful! No account type found. Check console for response details.');
+          alert('Login successful!');
           window.location.href = '/';
         }
         
