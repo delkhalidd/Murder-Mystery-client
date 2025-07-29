@@ -1,7 +1,7 @@
-require('dotenv').config();
 
-const API_URL = process.env.API_URL;
 
+const API_URL = 'http://localhost:3000/api';
+    
 const register = async (userData) => {
   try {
     const response = await fetch(`${API_URL}/user/register`, {

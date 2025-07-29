@@ -17,8 +17,6 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'pages'));
 
 
-
-
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -29,6 +27,14 @@ app.get('/login', (req, res) => {
 
 app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'pages', 'register.html'));
+});
+
+app.get('/teacher-dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, 'pages', 'teacher-dashboard.html'));
+});
+
+app.get('/student-homepage', (req, res) => {
+  res.sendFile(path.join(__dirname, 'pages', 'student-homepage.html'));
 });
 
 app.listen(3001, () => {
