@@ -18,5 +18,8 @@ export default defineConfig({
       }
     },
     outDir: resolve(__dirname, "dist")
+  },
+  server: {
+    port: 3001
   }
 });
