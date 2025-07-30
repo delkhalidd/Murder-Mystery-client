@@ -1,7 +1,6 @@
-
-
 @use "./base.scss";
 @use "./styles.scss";
+
 .register-container {
   @include base.box(false);
   max-width: 540px;
@@ -49,7 +48,7 @@
           border-color: var(--brand-dark);
           box-shadow: 0 0 0 3px rgba(254, 188, 90, 0.25);
         }
-        
+
       }
     }
 

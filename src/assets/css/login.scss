@@ -1,5 +1,6 @@
 @use "./base.scss";
 @use "./styles.scss";
+
 .login-container {
   @include base.box(false);
   max-width: 480px;
@@ -50,7 +51,7 @@
     }
 
     button {
-      
+
       width: 100%;
       margin-top: 0.5rem;
     }

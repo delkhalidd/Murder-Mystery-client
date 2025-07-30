@@ -1,70 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Register</title>
-    <link rel="stylesheet" href="assets/css/register.scss">
-    <script defer type="module" src="assets/js/register.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Register</title>
+  <link rel="stylesheet" href="assets/css/register.scss">
+  <script defer type="module" src="assets/js/register.js"></script>
 </head>
 <body>
-    <div class="background">
-        
-  <div class="page-center">
-    <div class="register-container">
+<div class="background">
+</div>
+
+<div class="page-center">
+  <div class="register-container">
 
 
-
-    
     <h1>Murder Mystery Game - Register</h1>
 
     <form id="registerForm">
-        <div>
-            <label for="firstname">First Name:</label>
-            <input type="text" id="firstname" name="firstname" required>
-        </div>
+      <div class="form-group">
+        <label for="firstname">First Name:</label>
+        <input type="text" id="firstname" name="firstname" required>
+      </div>
 
-        <div>
-            <label for="surnames">Surname:</label>
-            <input type="text" id="surnames" name="surnames" required>
-        </div>
+      <div class="form-group">
+        <label for="surnames">Surname:</label>
+        <input type="text" id="surnames" name="surnames" required>
+      </div>
 
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+      </div>
 
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
 
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
 
-        <div>
-            <label for="account_type">Account Type:</label>
-            <select id="account_type" name="account_type" required>
-                <option value="1">Student</option>
-                <option value="0">Teacher</option>
-            </select>
-        </div>
+      <div class="form-group">
+        <label for="account_type">Account Type:</label>
+        <select id="account_type" name="account_type" required>
+          <option value="1">Student</option>
+          <option value="0">Teacher</option>
+        </select>
+      </div>
 
-        <div>
-            <button type="submit">Register</button>
-        </div>
+      <div class="form-group">
+        <button type="submit">Register</button>
+      </div>
     </form>
 
     <div id="message"></div>
 
     <div>
-        <p>Already have an account? <a href="/login">Login here</a></p>
-        <p><a href="/static">Back to Home</a></p>
+      <p>Already have an account? <a href="/login" class="underline">Login here</a></p>
+      <p><a href="/static">Back to Home</a></p>
     </div>
+  </div>
 </div>
-  </div>
-  </div>
 </body>
 </html>

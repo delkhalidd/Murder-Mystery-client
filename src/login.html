@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-     <link rel="stylesheet" href="assets/css/login.scss">
-    <script defer type="module" src="assets/js/login.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="assets/css/login.scss">
+  <script defer type="module" src="assets/js/login.js"></script>
 </head>
 <body>
-    <div class="background"> 
-        <div class="page-center">
+<div class="background"></div>
+<div class="page-center login-container">
+  <h1>Murder Mystery Game - Login</h1>
 
-      
-    <h1>Murder Mystery Game - Login</h1>
-
-    <form id="loginForm">
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-
-        <div>
-            <button class="btn-primary" type="submit">Login</button>
-        </div>
-    </form>
-
-    <div>
-        <p>Don't have an account? <a href="/register">Register here</a></p>
-        <p><a href="/static">Back to Home</a></p>
+  <form id="loginForm">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
     </div>
-</div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">Login</button>
+    </div>
+  </form>
+
+  <div>
+    <p>Don't have an account? <a href="/register" class="underline">Register here</a></p>
+    <p><a href="/static">Back to Home</a></p>
   </div>
+</div>
+</div>
 </body>
 </html>
