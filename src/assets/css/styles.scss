@@ -43,17 +43,18 @@
       }
     }
   }
+
+  main {
+    flex-grow: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 }
 
-.teacher-cont main {
-  flex-grow: 1;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  overflow: scroll;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
 
 .teacher-cont main .cases{
   flex-grow: 1;
