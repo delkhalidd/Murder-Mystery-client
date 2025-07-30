@@ -70,15 +70,15 @@
   @include base.shadow;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   padding: 0.5rem 1rem;
-  gap: 0.5rem;
+  gap: 2rem;
 }
 
 .teacher-cont main .case .buttons{
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
+  margin-left: auto;
 }
 
 .teacher-cont main .case a{

@@ -198,7 +198,7 @@ const showMessage = (message, type = 'info') => {
 
       idHeader.innerText = `Case ${i}`;
       nameHeader.innerText = c.title;
-      playerCountHeader.innerText = c.questions.length;
+      // playerCountHeader.innerText = c.questions.length;
       detailsSpan.innerText = "View Details";
       analyticsSpan.innerText = "View Analytics";
 
