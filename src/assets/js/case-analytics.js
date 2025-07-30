@@ -1,6 +1,6 @@
 import {getCaseAnalytics, getCaseDetails} from "./api";
 import '@carbon/charts/styles.css'
-import {HeatmapChart, MeterChart, PieChart, SimpleBarChart} from "@carbon/charts";
+import {HeatmapChart, MeterChart, PieChart} from "@carbon/charts";
 import "../css/chartOverrides.scss";
 import {baseChartOpts, baseMeterChartOpts} from "./const";
 
@@ -65,7 +65,7 @@ import {baseChartOpts, baseMeterChartOpts} from "./const";
           value: correct
         }
       });
-    }).reduce((prev, cur) => [...prev, ...cur], []),
+    }).reduce((prev, cur) => [...prev, ...cur.flat()], []).sort((a, b) => a.question < b.question ? -1 : 1),
     options: {
       toolbar: {
         enabled: false
@@ -77,10 +77,6 @@ import {baseChartOpts, baseMeterChartOpts} from "./const";
         gradient: {
           enabled: true
         }
-      },
-      getFillColor: (group, label2, data, defaultFillColor) => {
-        console.log(data);
-        return "#fff";
       },
       axes: {
         bottom: {
