@@ -1,6 +1,6 @@
 import {getCaseAnalytics, getCaseDetails} from "./api";
 import '@carbon/charts/styles.css'
-import {HeatmapChart, MeterChart, PieChart} from "@carbon/charts";
+import {HeatmapChart, MeterChart, PieChart, SimpleBarChart} from "@carbon/charts";
 import "../css/chartOverrides.scss";
 import {baseChartOpts, baseMeterChartOpts} from "./const";
 
@@ -118,6 +118,7 @@ import {baseChartOpts, baseMeterChartOpts} from "./const";
     const body = document.createElement("h4");
     const chartCont = document.createElement("div");
     const pieChart = document.createElement("div");
+    const timeChart = document.createElement("div");
     let qi = i;
 
     title.innerText = "[SEE TRANSFORMED]";
@@ -135,7 +136,7 @@ import {baseChartOpts, baseMeterChartOpts} from "./const";
 
     itemCont.append(title, body);
     el.append(itemCont, chartCont);
-    chartCont.append(pieChart);
+    chartCont.append(timeChart, pieChart);
 
     new PieChart(pieChart, {
       data: Object.entries(item.analytics.answers).map(([group, value]) => {
@@ -146,8 +147,37 @@ import {baseChartOpts, baseMeterChartOpts} from "./const";
       options: {
         ...baseChartOpts,
         title: 'Answers',
-        width: '250px',
-        height: "auto",
+        width: 'auto',
+        height: "250px",
+      }
+    });
+
+    const sorted = item.analytics.time_taken.sort((a, b) => a > b ? -1 : 1).map(s=>s/1000);
+    const avg = sorted.length === 0 ? 0 : (sorted.reduce((prev, cur) => prev + cur, 0) / sorted.length);
+
+    new SimpleBarChart(timeChart, {
+      data: [
+        { group: 'Min', value: Math.min(...sorted) },
+        { group: 'Average', value: avg },
+        { group: 'Median', value: sorted.length === 0 ? 0 : sorted[Math.floor(sorted.length/2)] },
+        { group: 'Max', value: Math.max(...sorted) },
+      ],
+      options: {
+        ...baseChartOpts,
+        title: 'Solve Time',
+        height: '250px',
+        width: '400px',
+        axes: {
+          bottom: {
+            title: 'Metric',
+            mapsTo: 'group',
+            scaleType: 'labels'
+          },
+          left: {
+            title: 'Time (seconds)',
+            mapsTo: 'value'
+          }
+        },
       }
     });
 
