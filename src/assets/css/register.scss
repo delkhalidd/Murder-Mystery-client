@@ -1,3 +1,7 @@
+
+
+@use "./base.scss";
+@use "./styles.scss";
 .register-container {
   @include base.box(false);
   max-width: 540px;
@@ -45,6 +49,7 @@
           border-color: var(--brand-dark);
           box-shadow: 0 0 0 3px rgba(254, 188, 90, 0.25);
         }
+        
       }
     }
 
@@ -60,6 +65,34 @@
     color: #c0392b;
     font-weight: 500;
   }
+
+  .page-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+  background: var(--bg-light);
+}
+.app-logo {
+  max-width: 100px;
+  margin-bottom: 1rem;
+}
+
+.form-input {
+  padding: 0.75rem;
+  border: 1.8px solid #ccc;
+  border-radius: 0.7rem;
+  background: #fdfdfd;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+
+  &:focus {
+    border-color: var(--brand-dark, #222);
+    box-shadow: 0 0 0 3px rgba(100, 100, 255, 0.2);
+    outline: none;
+  }
+}
 
   .register-links {
     margin-top: 2rem;
