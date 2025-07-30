@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Homepage - Murder Mystery</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script defer type="module" src="assets/js/auth.js"></script>
+    <script defer type="module" src="assets/js/student-dashboard.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Student Homepage</h1>
+        <nav>
+            <a href="/static" class="nav-link">Home</a>
+            <a href="#" onclick="logout()" class="nav-link">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="homepage-container">
+            <h2>Welcome, Student!</h2>
+            <p>Ready to solve some mysteries? Join a case or continue your investigation.</p>
+
+            <div class="game-actions">
+                <div class="action-card">
+                    <h3>Join New Case</h3>
+                    <p>Enter an invite token from your teacher to join a new case.</p>
+                    <form id="joinCaseForm" class="inline-form">
+                        <input type="text" id="inviteToken" placeholder="Enter invite token" required>
+                        <button type="submit" class="btn btn-primary">Join Case</button>
+                    </form>
+                </div>
+
+                <div class="action-card">
+                    <h3>My Active Cases</h3>
+                    <button id="loadCasesBtn" class="btn btn-secondary">View My Cases</button>
+                    <div id="activeCases" class="cases-list"></div>
+                </div>
+
+                <div class="action-card">
+                    <h3>My Progress</h3>
+                    <p>Check your answers and performance on completed cases.</p>
+                    <button id="viewProgressBtn" class="btn btn-secondary">View Progress</button>
+                </div>
+            </div>
+
+            <div id="message" class="message-container"></div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+          console.log('Student homepage loading...');
+          await checkAuth(1);
+        });
+    </script>
+</body>
+</html>
