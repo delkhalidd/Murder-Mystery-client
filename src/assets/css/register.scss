@@ -1,0 +1,110 @@
+
+
+@use "./base.scss";
+@use "./styles.scss";
+.register-container {
+  @include base.box(false);
+  max-width: 540px;
+  margin: 5vh auto;
+  padding: 2.5rem 3rem;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 1.25rem;
+  text-align: center;
+
+  h1 {
+    color: var(--brand-dark);
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      text-align: left;
+
+      label {
+        font-weight: 600;
+        margin-bottom: 0.4rem;
+        color: var(--brand-dark);
+      }
+
+      input,
+      select {
+        padding: 0.75rem;
+        border: 2px solid var(--brand);
+        border-radius: 0.75rem;
+        background-color: var(--bg-light);
+        font-size: 1rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+
+        &:focus {
+          outline: none;
+          border-color: var(--brand-dark);
+          box-shadow: 0 0 0 3px rgba(254, 188, 90, 0.25);
+        }
+        
+      }
+    }
+
+    button {
+      @extend .btn;
+      @extend .btn-primary;
+      margin-top: 1rem;
+    }
+  }
+
+  #message {
+    margin-top: 1.5rem;
+    color: #c0392b;
+    font-weight: 500;
+  }
+
+  .page-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+  background: var(--bg-light);
+}
+.app-logo {
+  max-width: 100px;
+  margin-bottom: 1rem;
+}
+
+.form-input {
+  padding: 0.75rem;
+  border: 1.8px solid #ccc;
+  border-radius: 0.7rem;
+  background: #fdfdfd;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+
+  &:focus {
+    border-color: var(--brand-dark, #222);
+    box-shadow: 0 0 0 3px rgba(100, 100, 255, 0.2);
+    outline: none;
+  }
+}
+
+  .register-links {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+
+    a {
+      color: var(--brand-dark);
+      text-decoration: underline;
+
+      &:hover {
+        color: var(--brand);
+      }
+    }
+  }
+}
