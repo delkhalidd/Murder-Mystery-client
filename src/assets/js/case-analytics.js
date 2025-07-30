@@ -163,7 +163,7 @@ import {baseChartOpts, baseMeterChartOpts} from "./const";
       options: {
         ...baseChartOpts,
         title: 'Answers',
-        width: 'auto',
+        width: '400px',
         height: "250px",
       }
     });
