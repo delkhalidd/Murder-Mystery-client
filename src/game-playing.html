@@ -22,28 +22,27 @@
     </header>
     <main class="box investigation-elements-box">
       <div class="brief-container">
-        <button id="prevBrief" class="btn btn-secondary" disabled>Previous</button>
         <div id="case-brief" class="brief-content">Loading…</div>
-        <button id="nextBrief" class="btn btn-secondary" disabled>Next</button>
+        <div class="buttons">
+          <button id="prevBrief" class="btn btn-secondary" disabled>Previous</button>
+          <button id="nextBrief" class="btn btn-secondary">Next</button>
+        </div>
         <p id="briefCounter" class="brief-counter"></p>
       </div>
     </main>
 
-    
-    <div id="question-container" class="brief-container" style="display: none;">
+
+    <form id="question-container" class="brief-container" style="display: none;">
       <div id="question-content" class="brief-content">Loading question…</div>
       <textarea
-        id="answerInput"
+        id="answer-input"
         class="brief-content"
         rows="4"
         placeholder="Type your answer here…"
+        required
       ></textarea>
-    </div>
-
-    
-    <button id="toggleModeBtn" class="btn btn-primary toggle-btn">
-      Answer Questions
-    </button>
+      <button id="submitBtn" class="btn btn-secondary">Submit</button>
+    </form>
   </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 import { checkAuth } from "./auth";
-import { getCaseDetails } from "./api";
+import {answerQuestion, getCaseDetails, startCase} from "./api";
 
 let briefs = [], questions = [], answers = [];
 let currentIndex = 0, questionIndex = 0;
@@ -9,7 +9,7 @@ function renderBrief() {
   const prevBtn = document.getElementById("prevBrief");
   const nextBtn = document.getElementById("nextBrief");
 
-  
+
   if (briefs.length <= 1) {
     prevBtn.style.display = "none";
     nextBtn.style.display = "none";
@@ -33,31 +33,39 @@ function renderBrief() {
           .innerText = `${currentIndex+1} of ${briefs.length}`;
 
   prevBtn.disabled = currentIndex === 0;
-  nextBtn.disabled = currentIndex === briefs.length-1;
+  if(prevBtn.disabled){
+    prevBtn.style.display = "none";
+  }else{
+    prevBtn.style.display = "block";
+  }
+  if(currentIndex === briefs.length-1){
+    nextBtn.innerText = "Begin Case";
+  }else{
+    nextBtn.innerText = "Next";
+  }
 }
 
 
-function typeWriter(text, el, speed = 50) {
+function typeWriter(text, el, speed = 30) {
   el.innerText = "";
   let idx = 0;
-  const ticker = setInterval(() => {
-    if (idx < text.length) {
-      el.innerText += text[idx++];
-    } else {
-      clearInterval(ticker);
-    }
-  }, speed);
+  return new Promise(r => {
+    const ticker = setInterval(() => {
+      if (idx < text.length) {
+        el.innerText += text[idx++];
+      } else {
+        clearInterval(ticker);
+        r();
+      }
+    }, speed);
+  });
 }
 
 function renderQuestion() {
   const q = questions[questionIndex];
   const contentEl = document.getElementById("question-content");
-  
-  typeWriter(q.body || q.question || "", contentEl, 40);
 
-  
-  document.getElementById("answerInput").value =
-    answers[questionIndex] || "";
+  return typeWriter(q.body || q.question || "", contentEl, 30);
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -74,56 +82,87 @@ document.addEventListener("DOMContentLoaded", async () => {
     const caseData = await getCaseDetails(caseId);
     document.getElementById("case-title").innerText = caseData.title;
 
-    
+
     briefs = caseData.briefs || [];
     renderBrief();
 
-    
+
     questions = caseData.questions || [];
     answers = Array(questions.length).fill("");
 
-    
-    const toggleBtn = document.getElementById("toggleModeBtn");
+
+    const submitBtn = document.getElementById("submitBtn");
     const briefCont = document.querySelector(".brief-container");
     const questionCont = document.getElementById("question-container");
 
-    toggleBtn.addEventListener("click", () => {
-      if (mode === "brief") {
-        if (!questions.length) return alert("No questions available.");
-        mode = "question";
-        briefCont.style.display = "none";
-        questionCont.style.display = "";
-        toggleBtn.innerText =
-          questions.length > 1 ? "Next" : "Submit";
-        renderQuestion();
-      } else {
-        answers[questionIndex] = document.getElementById("answerInput").value;
-        if (questionIndex < questions.length - 1) {
-          questionIndex++;
-          toggleBtn.innerText =
-            questionIndex === questions.length - 1
-              ? "Submit"
-              : "Next";
-          renderQuestion();
-        } else {
-          
-          console.log("Collected answers:", answers);
-          window.location.href = "/student-homepage";
-        }
+    // toggleBtn.addEventListener("click", () => {
+    //   if (mode === "brief") {
+    //     if (!questions.length) return alert("No questions available.");
+    //     mode = "question";
+    //     briefCont.style.display = "none";
+    //     questionCont.style.display = "";
+    //     toggleBtn.innerText =
+    //       questions.length > 1 ? "Next" : "Submit";
+    //     renderQuestion();
+    //   } else {
+    //     answers[questionIndex] = document.getElementById("answerInput").value;
+    //     if (questionIndex < questions.length - 1) {
+    //       questionIndex++;
+    //       toggleBtn.innerText =
+    //         questionIndex === questions.length - 1
+    //           ? "Submit"
+    //           : "Next";
+    //       renderQuestion();
+    //     } else {
+    //
+    //       console.log("Collected answers:", answers);
+    //       window.location.href = "/student-homepage";
+    //     }
+    //   }
+    // });
+
+    questionCont.addEventListener("submit", async e => {
+      e.preventDefault();
+      const q = caseData.questions[questionIndex];
+      const textarea = document.getElementById("answer-input");
+      const answer = textarea.value;
+      const result = await answerQuestion(caseData.id, q.id, answer).catch(e=>alert(`Something went wrong: ${e}`));
+      if(!!result){
+        alert(result.correct ? "Correct!" : `Incorrect, the answer was: ${result.answer}`);
       }
+      textarea.value = "";
+      questionIndex++;
+      submitBtn.disabled = true;
+
+      if(questionIndex >= questions.length) return window.location.href = "/student-homepage";
+
+      await renderQuestion();
+      submitBtn.disabled = false;
     });
 
-    
+
     document.getElementById("prevBrief").addEventListener("click", () => {
       if (currentIndex > 0) {
         currentIndex--;
         renderBrief();
       }
     });
-    document.getElementById("nextBrief").addEventListener("click", () => {
+    document.getElementById("nextBrief").addEventListener("click", async () => {
       if (currentIndex < briefs.length - 1) {
         currentIndex++;
         renderBrief();
+      } else if (mode === "brief") {
+        if (!questions.length) return alert("No questions available.");
+        await startCase(caseData.id).catch(e=>null);
+        mode = "question";
+        briefCont.style.display = "none";
+        questionCont.style.display = "";
+        submitBtn.innerText =
+          questions.length > 1 ? "Next" : "Submit";
+
+        submitBtn.disabled = true;
+        await renderQuestion();
+        submitBtn.disabled = false;
       }
     });
   } catch (err) {

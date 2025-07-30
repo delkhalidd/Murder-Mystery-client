@@ -43,18 +43,18 @@
       }
     }
   }
-}
 
-.teacher-cont main {
-  flex-grow: 1;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  overflow: scroll;
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  main {
+    flex-grow: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
 }
 
 .teacher-cont main .cases{
@@ -337,6 +337,10 @@
       background: #c0392b;
     }
   }
+
+  &:disabled{
+    filter: grayscale(1) brightness(0.9);
+  }
 }
 
 .loading-overlay {
@@ -389,9 +393,9 @@
 .student-cont {
 
   main {
-    flex-grow: 1;          
+    flex-grow: 1;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
   }
 
   h2.underline {
@@ -400,13 +404,13 @@
   }
 
   p {
-        
+
         font-size: 1.1rem;
         color: #555;
       }
 
     h3 {
-        
+
         font-size: 1.5rem;
       }
 
@@ -434,9 +438,9 @@
 
 .homepage-container {
   display: flex;
-  flex-direction: row;       
+  flex-direction: row;
   justify-content: flex-start;
-  align-items: flex-start;   
+  align-items: flex-start;
   flex: 1;
   gap: 0.75rem;
   width: 100%;
@@ -444,7 +448,7 @@
 }
 
 .student-cont main .completed-cases {
-  flex: 0 0 30%;            
+  flex: 0 0 30%;
   @include base.box(false);
   padding: 1rem;
   align-self: stretch;
@@ -452,7 +456,7 @@
 
 .game-actions {
   @include base.box(false);
-  flex: 1;                  
+  flex: 1;
   width: 60%;
   text-align: center;
   display: flex;
@@ -469,19 +473,19 @@
 
     .inline-form {
       display: flex;
-      flex-direction: column;   
-      gap: 0.75rem;             
+      flex-direction: column;
+      gap: 0.75rem;
 
       input[type="text"] {
-        width: 100%;            
+        width: 100%;
       }
 
       button.btn-primary {
-        width: auto;            
-        align-self: center; 
+        width: auto;
+        align-self: center;
       }
     }
-    
+
   }
 }
 
@@ -513,15 +517,29 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+
+  .buttons{
+    display: flex;
+    gap: 0.5rem;
+  }
 }
 
 .brief-content {
+  @include base.box(false);
   width: 100%;
   background: var(--neutral);
   padding: 1.5rem;
   text-align: center;
   border-radius: 0.75rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+  &#answer-input{
+    border: var(--brand) 2px solid;
+
+    &:focus-visible{
+      outline: var(--brand) 2px solid;
+    }
+  }
 }
 
 .brief-counter {
@@ -565,13 +583,17 @@
   white-space: pre-wrap;
   word-break: break-word;
 }
-#question-content::after {
-  content: "|";
-  position: absolute;
-  right: 0;
-  animation: blink 0.7s steps(1) infinite;
-}
+//#question-content::after {
+//  content: "|";
+//  position: absolute;
+//  right: 0;
+//  animation: blink 0.7s steps(1) infinite;
+//}
 @keyframes blink {
   0%,100% { opacity: 0 }
   50%     { opacity: 1 }
+}
+
+#completedCasesList li{
+  margin-bottom: 0.5rem;
 }

@@ -4,13 +4,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   console.log('Student homepage loading…');
   await checkAuth(1);
 
-  
+
   const stored = localStorage.getItem('userData');
   if (stored) {
     const { firstname } = JSON.parse(stored);
     document.getElementById('user_fname').textContent = firstname || '';
   }
-  
+
 
   const joinForm = document.getElementById('joinCaseForm');
   joinForm.addEventListener('submit', e => {
@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
 
-  
+
   try {
-    const cases = await getMyCases();           
+    const cases = await getMyCases();
     const list  = document.getElementById('completedCasesList');
     list.innerHTML = '';
     if (cases.length) {
@@ -44,9 +44,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         const li = document.createElement('li');
         const a  = document.createElement('a');
         a.href        = `/game-playing?id=${c.id}`;
-        a.textContent = c.title;
-        li.appendChild(a);
-        list.appendChild(li);
+        li.textContent = c.title;
+        a.appendChild(li);
+        list.appendChild(a);
       });
     } else {
       list.innerHTML = '<li>No completed cases yet.</li>';

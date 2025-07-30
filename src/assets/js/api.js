@@ -16,7 +16,7 @@ export const makeAuthenticatedRequest = async (url, options = {}) => {
     credentials: 'include'
   };
 
-  const response = await fetch(url, { ...defaultOptions, ...options });
+  const response = await fetch(url, { ...options, ...defaultOptions });
 
 
   if (response.status === 401) {
@@ -219,6 +219,46 @@ export const getQuestionsStatus = async (caseId) => {
       return await response.json();
     } else {
       throw new Error('Failed to load questions status');
+    }
+  } catch (error) {
+    console.error('Load questions status failed:', error);
+    throw error;
+  }
+};
+
+export const startCase = async (caseId) => {
+  try {
+    const response = await makeAuthenticatedRequest(`${API_URL}/case/${caseId}/start`, {
+      method: 'PATCH'
+    });
+
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw new Error('Failed to start case');
+    }
+  } catch (error) {
+    console.error('Load questions status failed:', error);
+    throw error;
+  }
+};
+
+export const answerQuestion = async (caseId, questionId, answer) => {
+  try {
+    const response = await makeAuthenticatedRequest(`${API_URL}/case/${caseId}/questions/${questionId}`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        answer
+      })
+    });
+
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw new Error(`Failed to answer question: ${await response.json().then(r=>r.message)}`);
     }
   } catch (error) {
     console.error('Load questions status failed:', error);
