@@ -4,6 +4,7 @@
   "description": "Client application for Murder Mystery educational game",
   "main": "app.js",
   "dependencies": {
+    "@carbon/charts": "^1.23.15",
     "axios": "^1.4.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",

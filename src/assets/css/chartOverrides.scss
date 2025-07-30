@@ -1,0 +1,25 @@
+.cds--chart-holder{
+  --cds-text-primary: var(--brand);
+  --cds-text-secondary: var(--brand);
+  --cds-charts-font-family: "Inknut Antiqua", serif;
+  --cds-charts-font-family-condensed: "Inknut Antiqua", serif;
+
+  @for $i from 1 through 14 {
+    --cds-charts-#{$i}-1-1: var(--brand);
+    --cds-charts-#{$i}-1-1-hovered: #e99d46;
+    --cds-charts-#{$i}-1-2: #6929c4;
+    --cds-charts-#{$i}-1-2-hovered: rgb(89.1835443038, 34.8240506329, 166.4759493671);
+
+    @if $i <= 2{
+      --cds-charts-#{$i}-2-1: var(--brand);
+      --cds-charts-#{$i}-2-1-hovered: #e99d46;
+      --cds-charts-#{$i}-2-2: #6929c4;
+      --cds-charts-#{$i}-2-2-hovered: rgb(89.1835443038, 34.8240506329, 166.4759493671);
+    }
+  }
+}
+
+#student-performance{
+  --cds-charts-mono-1-11: oklch(84.1% 0.238 128.85);
+  --cds-charts-mono-1-1: oklch(70.4% 0.191 22.216);
+}
