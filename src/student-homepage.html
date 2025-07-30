@@ -6,54 +6,52 @@
     <title>Student Homepage - Murder Mystery</title>
     <link rel="stylesheet" href="assets/css/styles.scss">
     <script defer type="module" src="assets/js/auth.js"></script>
-    <script defer type="module" src="assets/js/student-dashboard.js"></script>
+    <script defer type="module" src="assets/js/student-homepage.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Student Homepage</h1>
-        <nav>
-            <a href="/static" class="nav-link">Home</a>
-            <a href="#" onclick="logout()" class="nav-link">Logout</a>
-        </nav>
-    </header>
-
-    <main>
-        <div class="homepage-container">
-            <h2>Welcome, Student!</h2>
-            <p>Ready to solve some mysteries? Join a case or continue your investigation.</p>
-
-            <div class="game-actions">
-                <div class="action-card">
-                    <h3>Join New Case</h3>
-                    <p>Enter an invite token from your teacher to join a new case.</p>
-                    <form id="joinCaseForm" class="inline-form">
-                        <input type="text" id="inviteToken" placeholder="Enter invite token" required>
-                        <button type="submit" class="btn btn-primary">Join Case</button>
-                    </form>
-                </div>
-
-                <div class="action-card">
-                    <h3>My Active Cases</h3>
-                    <button id="loadCasesBtn" class="btn btn-secondary">View My Cases</button>
-                    <div id="activeCases" class="cases-list"></div>
-                </div>
-
-                <div class="action-card">
-                    <h3>My Progress</h3>
-                    <p>Check your answers and performance on completed cases.</p>
-                    <button id="viewProgressBtn" class="btn btn-secondary">View Progress</button>
-                </div>
+    <div class="background"></div>
+    <div class="student-cont base-cont">
+        <header>
+            <div class="box">
+                <img src="./assets/img/logo.png" alt="logo" class="logo shadow">
+                <h1 class="shadow underline">Welcome <span id="user_fname"></span></h1>
             </div>
+            <nav>
+                <a href="#" onclick="logout()" class="nav-link"><span class="shadow">Logout</span></a>
+            </nav>
+        </header>
 
-            <div id="message" class="message-container"></div>
-        </div>
-    </main>
+        <main>
+            <div class="homepage-container">
+                <div class="game-actions">
+                    <div class="action-card">
+                        <h2 class="underline shadow">Ready to solve some mysteries?</h2>
+                        <p>Paste your full invite URL or token below to join a new case:</p>
+                        <h3>Join New Case</h3>
+                        <form id="joinCaseForm" class="inline-form" action="/invite" method="GET">
+                            <input
+                              type="text"
+                              id="inviteToken"
+                              name="token"
+                              placeholder="Paste full URL or token"
+                              required
+                            >
+                            <button type="submit" class="btn btn-primary">Join Case</button>
+                        </form>
+                    </div>
+                </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-          console.log('Student homepage loading...');
-          await checkAuth(1);
-        });
-    </script>
+               
+                <aside class="completed-cases">
+                    <h2 class="underline shadow">Completed Cases</h2>
+                    <ul id="completedCasesList">
+                      <li>Loading…</li>
+                    </ul>
+                  </aside>
+
+                <div id="message" class="message-container"></div>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

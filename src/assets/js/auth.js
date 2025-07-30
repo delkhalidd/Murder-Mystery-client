@@ -42,5 +42,7 @@ const logout = () => {
   window.location.href = '/login?message=Logged out successfully';
 };
 
+export { checkAuth, logout };
+
 window.checkAuth = checkAuth;
 window.logout = logout;

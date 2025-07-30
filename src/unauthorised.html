@@ -7,31 +7,37 @@
     <link rel="stylesheet" href="assets/css/styles.scss">
 </head>
 <body>
-    <header>
-        <h1>Access Denied</h1>
-    </header>
+  <div class="background"></div>
+  <div class="base-cont unauth-container">
+    <main class="page-content">
+      <img src="./assets/img/logo.png" alt="logo" class="logo shadow">
+      <h2>🚫 Unauthorised Access</h2>
+      <p>You don't have permission to access this page.</p>
 
-    <main>
-        <div class="dashboard-container">
-            <h2>🚫 Unauthorised Access</h2>
-            <p>You don't have permission to access this page.</p>
-
-            <div class="game-actions">
-                <div class="action-card">
-                    <h3>What can you do?</h3>
-                    <ul>
-                        <li>Go back to the <a href="/static">home page</a></li>
-                        <li>Login with the correct account type</li>
-                        <li>Contact your administrator if you think this is an error</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div style="margin-top: 2rem;">
-                <a href="/static" class="btn btn-primary">Back to Home</a>
-                <a href="/login" class="btn btn-secondary">Login</a>
-            </div>
+      <div class="game-actions">
+        <div class="action-card">
+          <h3>Relogin or Go to Homepage</h3>
         </div>
+      </div>
+
+      <div class="page-actions">
+        <a id="homeBtn" href="/static" class="btn btn-primary">Back to Home</a>
+        <a href="/login" class="btn btn-secondary">Login</a>
+      </div>
     </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const homeBtn = document.getElementById('homeBtn');
+      let target = '/login';
+      try {
+        const user = JSON.parse(localStorage.getItem('userData') || '{}');
+        if (user.account_type === 0) target = '/teacher-dashboard';
+        else if (user.account_type === 1) target = '/student-homepage';
+      } catch (e) { }
+      homeBtn.setAttribute('href', target);
+    });
+  </script>
 </body>
 </html>

@@ -1,1 +1,48 @@
-// Game Playing Page for Students
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Case Brief – Murder Mystery</title>
+  <link rel="stylesheet" href="assets/css/styles.scss" />
+  <script defer type="module" src="assets/js/auth.js"></script>
+  <script defer type="module" src="assets/js/game-playing.js"></script>
+</head>
+<body>
+  <div class="game-playing background"></div>
+  <div class="game-playing base-cont">
+    <header>
+      <div class="case-title">
+        <img src="./assets/img/logo.png" alt="logo" class="logo shadow" />
+        <h1 class="shadow underline" id="case-title">Loading…</h1>
+      </div>
+      <div class="top-right-image">
+        <img src="./assets/img/detective-holding-magnifying-glass-600nw-487879585-removebg-preview.png" alt="Detective" />
+      </div>
+    </header>
+    <main class="box investigation-elements-box">
+      <div class="brief-container">
+        <div id="case-brief" class="brief-content">Loading…</div>
+        <div class="buttons">
+          <button id="prevBrief" class="btn btn-secondary" disabled>Previous</button>
+          <button id="nextBrief" class="btn btn-secondary">Next</button>
+        </div>
+        <p id="briefCounter" class="brief-counter"></p>
+      </div>
+    </main>
+
+
+    <form id="question-container" class="brief-container" style="display: none;">
+      <div id="question-content" class="brief-content">Loading question…</div>
+      <textarea
+        id="answer-input"
+        class="brief-content"
+        rows="4"
+        placeholder="Type your answer here…"
+        required
+      ></textarea>
+      <button id="submitBtn" class="btn btn-secondary">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
