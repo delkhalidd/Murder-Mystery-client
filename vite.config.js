@@ -12,6 +12,7 @@ export default defineConfig({
         caseAnalytics: resolve(__dirname, "src/case-analytics.html"),
         createCase: resolve(__dirname, "src/create-case.html"),
         gamePlaying: resolve(__dirname, "src/game-playing.html"),
+        invite: resolve(__dirname, "src/invite.html"),
         studentHomepage: resolve(__dirname, "src/student-homepage.html"),
         teacherDashboard: resolve(__dirname, "src/teacher-dashboard.html"),
         unauthorized: resolve(__dirname, "src/unauthorised.html"),

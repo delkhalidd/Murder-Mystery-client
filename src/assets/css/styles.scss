@@ -344,13 +344,15 @@
   border-radius: 0.75rem;
   font-size: 1rem;
   font-weight: 600;
-  cursor: pointer;
+  &:not(:disabled){
+    cursor: pointer;
+  }
   transition: background-color 0.2s, transform 0.1s;
 
   &-primary {
     background: var(--brand);
     color: var(--neutral);
-    &:hover {
+    &:hover:not(:disabled) {
       background: var(--brand-dark);
       transform: translateY(-1px);
     }
@@ -359,7 +361,7 @@
     background: var(--neutral);
     color: var(--brand);
     border: 2px solid var(--brand);
-    &:hover {
+    &:hover:not(:disabled) {
       background: var(--brand);
       color: var(--neutral);
     }
@@ -367,7 +369,7 @@
   &-danger {
     background: #e74c3c;
     color: var(--neutral);
-    &:hover {
+    &:hover:not(:disabled) {
       background: #c0392b;
     }
   }

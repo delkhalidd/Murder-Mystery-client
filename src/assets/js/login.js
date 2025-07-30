@@ -44,7 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
           const accountType = result.user.account_type;
           console.log('Account type:', accountType);
 
-          if (accountType === 0 || accountType === '0') {
+          const redirectTarget = window.localStorage.getItem("loginRedirect");
+          if(redirectTarget){
+            window.localStorage.removeItem("loginRedirect");
+            window.location = redirectTarget;
+          }else if (accountType === 0 || accountType === '0') {
             alert('Welcome, Teacher!');
             window.location.href = '/teacher-dashboard';
           } else if (accountType === 1 || accountType === '1') {
