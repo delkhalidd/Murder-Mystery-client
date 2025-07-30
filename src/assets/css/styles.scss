@@ -50,9 +50,10 @@
   text-align: center;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 }
 
-.teacher-cont main .cases, .teacher-cont main .case-details{
+.teacher-cont main .cases{
   flex-grow: 1;
   overflow: scroll;
   display: flex;
@@ -92,22 +93,84 @@
   }
 }
 
+.teacher-cont .case-details{
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  overflow: scroll;
+  gap: 1rem;
+  text-align: left;
+  padding: 1.5rem;
+
+  .buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    white-space: nowrap;
+    margin-top: auto;
+  }
+
+  .overview{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 33.3%;
+  }
+
+  .questions{
+    overflow: scroll;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    #questions-status{
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #questions-list{
+      >div > :not(:last-child):not(:first-child) {
+        border: 0 solid var(--brand);
+        border-bottom-width: 1px;
+      }
+    }
+
+    .item{
+      margin: 1rem 0;
+
+      >div>span{
+        font-size: 12px;
+        user-select: none;
+      }
+      h4, p{
+        margin: 0.1rem 0 1rem;
+      }
+    }
+  }
+}
+
+
+
+
+
 // case creation styles
 
 .dashboard-container {
   display: flex;
-  align-items: stretch;   
+  align-items: stretch;
   gap: 1rem;
-  flex: 1;             
-  overflow-y: auto;    
-  min-height: 0;       
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .left-column {
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
-  width: 60%;  
+  width: 60%;
 }
 
 .question-title-box {
@@ -127,11 +190,11 @@
   width: 35%;
   display: flex;
   flex-direction: column;
-  align-self: stretch;    
+  align-self: stretch;
   padding: 2rem;
   margin-bottom: 0;
 
-  
+
   form {
     display: flex;
     flex-direction: column;
@@ -171,22 +234,22 @@
 
 .investigation-elements-box {
   @include base.box(false);
-  background: transparent !important; 
-  padding: 0;   
-  width: 100%; 
-  overflow-y: auto;    
-  -ms-overflow-style: none;   
-  scrollbar-width: none;            
+  background: transparent !important;
+  padding: 0;
+  width: 100%;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .investigation-elements-box #inputs-container {
   display: flex;
-  flex-direction: column;    
+  flex-direction: column;
   gap: 1rem;
-  max-height: 50vh;          
-  padding-right: 0.5rem;     
+  max-height: 50vh;
+  padding-right: 0.5rem;
 
-  
+
 }
 
 .question-title-box h2,
@@ -271,7 +334,7 @@
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.5);
-  display: none;           
+  display: none;
   align-items: center;
   justify-content: center;
   z-index: 1000;
