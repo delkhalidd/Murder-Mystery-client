@@ -175,6 +175,23 @@ export const getCaseDetails = async (caseId) => {
   }
 };
 
+export const getCaseAnalytics = async (caseId) => {
+  try {
+    const response = await makeAuthenticatedRequest(`${API_URL}/case/${caseId}/analytics`, {
+      method: 'GET'
+    });
+
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw new Error('Failed to load case details');
+    }
+  } catch (error) {
+    console.error('Load case details failed:', error);
+    throw error;
+  }
+};
+
 export const getCaseByInvite = async (token) => {
   try {
     const response = await makeAuthenticatedRequest(`${API_URL}/case/invite/${token}`, {

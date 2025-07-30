@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Dashboard - Murder Mystery</title>
+  <link rel="stylesheet" href="assets/css/styles.scss">
+  <script defer type="module" src="assets/js/auth.js"></script>
+  <script defer type="module" src="assets/js/case-analytics.js"></script>
+</head>
+<body>
+<div class="background"></div>
+<div class="analytics-cont base-cont">
+  <header>
+    <div class="box">
+      <img src="./assets/img/logo.png" alt="" class="logo shadow">
+      <h1 class="shadow underline">Welcome <span id="user_fname"></span></h1>
+    </div>
+    <nav>
+      <a href="#" onclick="logout()" class="nav-link">
+        <span class="shadow">Logout</span>
+      </a>
+      <a href="/teacher-dashboard" class="nav-link">
+        <span class="shadow">Cases</span>
+      </a>
+    </nav>
+  </header>
+
+  <main class="box">
+    <div id="case-details" class="case-details">
+      <div class="overview">
+        <h2 class="underline shadow">Case Analytics</h2>
+        <div class="stats">
+          <div id="case-info"></div>
+          <div id="accepted-invites"></div>
+          <div id="student-performance"></div>
+        </div>
+
+        <div class="buttons">
+          <button id="copy-invite" class="btn btn-secondary copy-invite">Copy invite URL</button>
+          <a id="back-to-cases" href="/teacher-dashboard" class="btn btn-secondary">Back to Cases</a>
+        </div>
+      </div>
+      <div class="questions">
+        <div id="questions-list"></div>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    await checkAuth(0);
+  });
+</script>
+</body>
+</html>
