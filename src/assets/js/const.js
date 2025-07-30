@@ -3,7 +3,7 @@ export const API_URL = import.meta.env.PROD ? "/api" : 'http://localhost:3000/ap
 export const baseChartOpts = {
   color: {
     pairing: {
-      option: 2
+      option: 1
     }
   },
   toolbar: {
