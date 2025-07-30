@@ -62,8 +62,16 @@ body{
   filter: drop-shadow(0 3px 3px rgb(0 0 0 / 0.12));
 }
 
+@mixin shadow-sm{
+  filter: drop-shadow(0 3px 3px rgb(0 0 0 / 0.08));
+}
+
 .shadow{
   @include shadow;
+
+  &-sm{
+    @include shadow-sm;
+  }
 }
 
 .box{

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invite - Murder Mystery</title>
+  <link rel="stylesheet" href="assets/css/styles.scss">
+  <script defer type="module" src="assets/js/auth.js"></script>
+  <script defer type="module" src="assets/js/invite.js"></script>
+</head>
+<body>
+<div class="background"></div>
+<div class="invite-cont base-cont">
+  <header>
+    <div class="box">
+      <img src="./assets/img/logo.png" alt="" class="logo shadow">
+      <h1 class="shadow underline">Welcome <span id="user_fname"></span></h1>
+    </div>
+    <nav>
+      <a href="#" onclick="logout()" class="nav-link">
+        <span class="shadow">Logout</span>
+      </a>
+      <a href="/" class="nav-link">
+        <span class="shadow">Home</span>
+      </a>
+    </nav>
+  </header>
+
+  <main class="box">
+    <div style="margin: auto;">loading...</div>
+  </main>
+</div>
+<script>
+  window.localStorage.setItem("loginRedirect", window.location.toString());
+  document.addEventListener('DOMContentLoaded', async () => {
+    const success = await checkAuth(1);
+    if(success) window.localStorage.removeItem("loginRedirect");
+  });
+</script>
+</body>
+</html>
