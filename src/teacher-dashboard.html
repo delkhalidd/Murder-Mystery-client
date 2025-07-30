@@ -27,16 +27,24 @@
   </header>
 
   <main class="box">
-    <h1 class="shadow underline">Closed Cases</h1>
+    <h1 class="shadow underline" id="case-header">Closed Cases</h1>
     <div class="cases" id="cases-section">
 
     </div>
     <div id="case-details" class="case-details" style="display: none;">
-      <h3>Case Details</h3>
-      <div id="case-info"></div>
-      <div id="questions-status"></div>
-      <div id="questions-list"></div>
-      <button id="back-to-cases" class="btn btn-secondary">Back to Cases</button>
+      <div class="overview">
+        <h2 class="underline shadow">Case Details</h2>
+        <div id="case-info"></div>
+
+        <div class="buttons">
+          <button id="copy-invite" class="btn btn-secondary copy-invite">Copy invite URL</button>
+          <button id="back-to-cases" class="btn btn-secondary">Back to Cases</button>
+        </div>
+      </div>
+      <div class="questions">
+        <div id="questions-status"></div>
+        <div id="questions-list"></div>
+      </div>
     </div>
   </main>
 
