@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
 
-  // fetch & render completed cases
+  
   try {
-    const cases = await getMyCases();           // or await getCompletedCases()
+    const cases = await getMyCases();           
     const list  = document.getElementById('completedCasesList');
     list.innerHTML = '';
     if (cases.length) {
