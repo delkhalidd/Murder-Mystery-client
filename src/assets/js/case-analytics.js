@@ -8,6 +8,23 @@ import {baseChartOpts, baseMeterChartOpts} from "./const";
   const id = new URLSearchParams(window.location.search).get("id");
   if(!id) return window.location.href = "/teacher-dashboard";
   const caseDetails = await getCaseDetails(id);
+  if(!caseDetails.id) return window.location.href = "/teacher-dashboard";
+
+  const copyButton = document.getElementById("copy-invite");
+  copyButton.addEventListener("click", async () => {
+    const url = new URL(window.location);
+    const oldText = copyButton.innerText;
+    url.pathname = "/invite";
+    url.search = "?token="+encodeURIComponent(caseDetails.invite_token);
+
+    const done = await window.navigator.clipboard.writeText(url.toString())
+      .then(()=>true).catch(()=>false);
+    if(!done) return window.prompt("Please copy the URL", url.toString());
+
+    copyButton.innerText = "Copied to clipboard!";
+    await new Promise(r=>setTimeout(r, 2000));
+    copyButton.innerText = oldText;
+  })
 
   const overview = document.createElement("div");
   overview.classList.add("case-info");
@@ -18,7 +35,6 @@ import {baseChartOpts, baseMeterChartOpts} from "./const";
 
   document.getElementById('case-info').outerHTML = overview.outerHTML;
 
-  if(!caseDetails) return window.location.href = "/teacher-dashboard";
   const analytics = await getCaseAnalytics(id);
   console.log(analytics);
 
