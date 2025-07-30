@@ -137,6 +137,7 @@ const showMessage = (message, type = 'info') => {
 
     const casesContainer = document.querySelector(".cases");
     let i = cases.length;
+    const focusedCase = new URLSearchParams(window.location.search).get("case");
     for(const c of cases){
       const child = document.createElement("div");
       child.classList.add("case");
@@ -148,6 +149,7 @@ const showMessage = (message, type = 'info') => {
 
       const detailsButton = document.createElement("a");
       const detailsSpan = document.createElement("span");
+      detailsButton.href = "#case-info";
       const analyticsButton = document.createElement("a");
       const analyticsSpan = document.createElement("span");
       analyticsButton.href = `/case-analytics?id=${c.id}`;
@@ -169,10 +171,9 @@ const showMessage = (message, type = 'info') => {
       child.append(idHeader, nameHeader, playerCountHeader, buttonCont);
 
       casesContainer.appendChild(child);
+      if(!!focusedCase && focusedCase === c.id.toString()) displayCaseDetails(c);
       i--;
     }
-
-    showMessage('', '');
 
   } catch (error) {
     console.error('Error in load cases:', error);
