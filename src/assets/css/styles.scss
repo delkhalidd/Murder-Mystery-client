@@ -484,3 +484,94 @@
     
   }
 }
+
+
+// game playing css
+
+.background.game-playing:before {
+  background: url("../img/GameBackground.PNG") center;
+  background-size: cover;
+}
+
+.case-title {
+  @include base.box(false);
+  display: flex;
+  flex-direction: row;
+  width: 55%;
+  margin-bottom: 50px;
+
+  h1 {
+    margin-left: 2rem;
+  }
+}
+
+.brief-container {
+  margin-top: 1rem;
+  margin: auto;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brief-content {
+  width: 100%;
+  background: var(--neutral);
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.brief-counter {
+  font-size: 0.9rem;
+  color: #fdfafa;
+}
+
+.game-playing header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.top-right-image img {
+  position: relative;
+  width: 16rem;
+  height: 16rem;
+  margin-right: 75px;
+  @include base.shadow;
+}
+
+
+.toggle-btn {
+  position: absolute;
+  bottom: 2rem;
+  width: 15rem;
+  height: 10rem;
+  right: 2rem;
+  font-size: larger;
+}
+
+
+#question-container {
+  margin-top: 1rem;
+}
+
+#question-content {
+  position: relative;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+#question-content::after {
+  content: "|";
+  position: absolute;
+  right: 0;
+  animation: blink 0.7s steps(1) infinite;
+}
+@keyframes blink {
+  0%,100% { opacity: 0 }
+  50%     { opacity: 1 }
+}
