@@ -17,18 +17,16 @@
                 <h1 class="shadow underline">Welcome <span id="user_fname"></span></h1>
             </div>
             <nav>
-                <a href="/static" class="nav-link"><span class="shadow">Home</span></a>
                 <a href="#" onclick="logout()" class="nav-link"><span class="shadow">Logout</span></a>
             </nav>
         </header>
 
         <main>
             <div class="homepage-container">
-                <h2 class="underline shadow">Ready to solve some mysteries?</h2>
-                <p>Paste your full invite URL or token below to join a new case:</p>
-
                 <div class="game-actions">
                     <div class="action-card">
+                        <h2 class="underline shadow">Ready to solve some mysteries?</h2>
+                        <p>Paste your full invite URL or token below to join a new case:</p>
                         <h3>Join New Case</h3>
                         <form id="joinCaseForm" class="inline-form" action="/invite" method="GET">
                             <input
@@ -42,6 +40,14 @@
                         </form>
                     </div>
                 </div>
+
+               
+                <aside class="completed-cases">
+                    <h2 class="underline shadow">Completed Cases</h2>
+                    <ul id="completedCasesList">
+                      <li>Loading…</li>
+                    </ul>
+                  </aside>
 
                 <div id="message" class="message-container"></div>
             </div>
