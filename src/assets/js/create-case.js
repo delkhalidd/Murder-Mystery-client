@@ -71,7 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
       } while (statusObj.status === "PROCESSING");
 
       
-      window.location.href = "/teacher-dashboard";
+      
+      window.location.href = `/teacher-dashboard?case=${newCase.id}`;
     } catch (err) {
       alert("Error creating case: " + err.message);
     } finally {

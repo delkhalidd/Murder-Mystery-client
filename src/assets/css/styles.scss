@@ -6,12 +6,12 @@
 }
 
 
-.teacher-cont, .invite-cont{
+.teacher-cont, .invite-cont {
   gap: 1rem;
   flex-grow: 1;
   @include base.shadow;
 
-  header{
+  header {
     display: flex;
     flex-direction: row;
     gap: 1rem;
@@ -44,7 +44,9 @@
     }
   }
 
-.teacher-cont main{
+}   
+
+.teacher-cont main {
   flex-grow: 1;
   text-align: center;
   display: flex;
