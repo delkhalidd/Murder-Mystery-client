@@ -194,6 +194,9 @@ import {baseChartOpts, baseMeterChartOpts} from "./const";
             mapsTo: 'value'
           }
         },
+        legend: {
+          enabled: false
+        },
       }
     });
 
