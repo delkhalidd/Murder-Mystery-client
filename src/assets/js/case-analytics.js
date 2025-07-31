@@ -135,7 +135,7 @@ import {baseChartOpts, baseMeterChartOpts} from "./const";
     const timeChart = document.createElement("div");
     let qi = i;
 
-    title.innerText = "[SEE TRANSFORMED]";
+    title.innerText = `[${qi+1}] [SEE TRANSFORMED]`;
     title.href = "#";
     body.innerText = caseDetails.questions[qi].original;
     chartCont.classList.add("charts");
@@ -144,7 +144,7 @@ import {baseChartOpts, baseMeterChartOpts} from "./const";
     title.addEventListener("click", (e) => {
       e.preventDefault();
       transformed = !transformed;
-      title.innerText = transformed ? "[SEE ORIGINAL]" : "[SEE TRANSFORMED]";
+      title.innerText = transformed ? `[${qi+1}] [SEE ORIGINAL]` : `[${qi+1}] [SEE TRANSFORMED]`;
       body.innerText = transformed ? item.body : caseDetails.questions[qi].original;
     });
 
