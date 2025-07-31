@@ -10,9 +10,9 @@ function renderBrief() {
   const nextBtn = document.getElementById("nextBrief");
 
 
-  if (briefs.length <= 1) {
+  if (briefs.length <= 0) {
     prevBtn.style.display = "none";
-    nextBtn.style.display = "none";
+    // nextBtn.style.display = "none";
   } else {
     prevBtn.style.display = "";
     nextBtn.style.display = "";

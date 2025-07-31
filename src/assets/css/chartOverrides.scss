@@ -10,6 +10,10 @@
     //--cds-charts-#{$i}-1-2: #6929c4;
     //--cds-charts-#{$i}-1-2-hovered: rgb(89.1835443038, 34.8240506329, 166.4759493671);
   }
+
+  p.title{
+    color: var(--brand-dark);
+  }
 }
 
 #student-performance{

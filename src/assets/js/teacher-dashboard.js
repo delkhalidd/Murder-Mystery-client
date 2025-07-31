@@ -63,10 +63,8 @@ const displayCaseDetails = async (caseDetails) => {
       const briefs = document.createElement("div");
       briefs.classList.add("briefs");
 
-      const questionsTitle = document.createElement("h2");
-      const briefsTitle = document.createElement("h2");
-      questionsTitle.classList.add("underline", "shadow");
-      briefsTitle.classList.add("underline", "shadow");
+      const questionsTitle = document.createElement("h1");
+      const briefsTitle = document.createElement("h1");
       questionsTitle.innerText = "Questions";
       briefsTitle.innerText = "Briefs";
 

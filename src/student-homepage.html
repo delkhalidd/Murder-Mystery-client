@@ -14,7 +14,7 @@
         <header>
             <div class="box">
                 <img src="./assets/img/logo.png" alt="logo" class="logo shadow">
-                <h1 class="shadow underline">Welcome <span id="user_fname"></span></h1>
+                <h1 class="shadow">Welcome <span id="user_fname"></span></h1>
             </div>
             <nav>
                 <a href="#" onclick="logout()" class="nav-link"><span class="shadow">Logout</span></a>
@@ -25,7 +25,7 @@
             <div class="homepage-container">
                 <div class="game-actions">
                     <div class="action-card">
-                        <h2 class="underline shadow">Ready to solve some mysteries?</h2>
+                        <h1>Ready to solve some mysteries?</h1>
                         <p>Paste your full invite URL or token below to join a new case:</p>
                         <h3>Join New Case</h3>
                         <form id="joinCaseForm" class="inline-form" action="/invite" method="GET">
@@ -41,9 +41,9 @@
                     </div>
                 </div>
 
-               
+
                 <aside class="completed-cases">
-                    <h2 class="underline shadow">Completed Cases</h2>
+                    <h1>Completed Cases</h1>
                     <ul id="completedCasesList">
                       <li>Loading…</li>
                     </ul>

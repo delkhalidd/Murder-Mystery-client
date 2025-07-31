@@ -117,9 +117,7 @@ import {baseChartOpts, baseMeterChartOpts} from "./const";
 
   const questions = document.createElement("div");
 
-  const questionsTitle = document.createElement("h2");
-
-  questionsTitle.classList.add("underline", "shadow");
+  const questionsTitle = document.createElement("h1");
 
   questionsTitle.innerText = "Questions";
 
@@ -165,6 +163,9 @@ import {baseChartOpts, baseMeterChartOpts} from "./const";
         title: 'Answers',
         width: '400px',
         height: "250px",
+        pie: {
+          alignment: "center",
+        }
       }
     });
 
@@ -182,7 +183,7 @@ import {baseChartOpts, baseMeterChartOpts} from "./const";
         ...baseChartOpts,
         title: 'Solve Time',
         height: '250px',
-        width: '400px',
+        width: '350px',
         axes: {
           bottom: {
             title: 'Metric',
