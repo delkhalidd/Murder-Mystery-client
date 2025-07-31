@@ -22,5 +22,14 @@ export default defineConfig({
   },
   server: {
     port: 3001
+  },
+  test: {
+    browser:{
+      provider: "playwright",
+      enabled: true,
+      instances: [
+        { browser: 'chromium' },
+      ],
+    },
   }
 });
