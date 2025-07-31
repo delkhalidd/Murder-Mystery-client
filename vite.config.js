@@ -30,6 +30,8 @@ export default defineConfig({
       instances: [
         { browser: 'chromium' },
       ],
+      api: 3001,
+      headless: true
     },
   }
 });
