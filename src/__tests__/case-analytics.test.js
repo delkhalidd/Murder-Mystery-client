@@ -15,7 +15,7 @@ describe("case analytics page", ()=>{
       return fakeDivs[id];
     });
 
-    window.history.pushState({}, '', `${window.location.pathname}?id=1`);W
+    window.history.pushState({}, '', `${window.location.pathname}?id=1`);
   });
 
 
