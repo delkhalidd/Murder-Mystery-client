@@ -31,7 +31,7 @@ export default defineConfig({
         { browser: 'chromium' },
       ],
       api: 3001,
-      headless: true
+      headless: false
     },
   }
 });
